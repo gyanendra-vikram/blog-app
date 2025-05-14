@@ -13,7 +13,7 @@ import EditBlog from './pages/EditBlog';
 
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem('token');
-  return token ? children : <Navigate to="/login" />;
+  return token ? children : <Navigate to="/login" replace />;
 };
 
 function App() {
@@ -33,9 +33,17 @@ function App() {
       {isLoggedIn && <Navbar onLogout={() => setIsLoggedIn(false)} />}
 
       <Routes>
+        <Route
+          path="/"
+          element={
+            isLoggedIn ? <Navigate to="/blogs" replace /> : <Navigate to="/login" replace />
+          }
+        />
+
         <Route path="/login" element={<Login onLogin={() => setIsLoggedIn(true)} />} />
         <Route path="/signup" element={<Signup onSignup={() => setIsLoggedIn(true)} />} />
-        <Route path="/" element={<PrivateRoute><Blogs /></PrivateRoute>} />
+
+        <Route path="/blogs" element={<PrivateRoute><Blogs /></PrivateRoute>} />
         <Route path="/create" element={<PrivateRoute><CreateBlog /></PrivateRoute>} />
         <Route path="/my-blogs" element={<PrivateRoute><MyBlogs /></PrivateRoute>} />
         <Route path="/edit/:id" element={<PrivateRoute><EditBlog /></PrivateRoute>} />

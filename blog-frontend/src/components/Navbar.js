@@ -10,7 +10,7 @@ export default function Navbar({ onLogout }) {
   const handleLogout = () => {
     localStorage.removeItem('token');
     toast.info('Logged out!');
-    if (onLogout) onLogout();
+    onLogout();
     navigate('/login');
   };
 
