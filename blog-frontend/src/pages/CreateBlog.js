@@ -17,7 +17,7 @@ export default function CreateBlog() {
   const uploadImageToBackend = async (imageFile) => {
     const formData = new FormData();
     formData.append('image', imageFile);
-
+    console.log('Uploading image:', formData);
     try {
       const res = await API.post('/blogs/upload-image', formData);
       return res.data.imageUrl;

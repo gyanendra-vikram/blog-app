@@ -13,7 +13,12 @@ const router = express.Router();
 router.route('/').get(protect, getBlogs).post(protect, createBlog);
 router.route('/:id').put(protect, updateBlog).delete(protect, deleteBlog);
 router.post('/upload-image', protect, upload.single('image'), (req, res) => {
-  res.status(200).json({ imageUrl: `/uploads/${req.file.filename}` });
+  if (!req.file || !req.file.path) {
+    console.log('❌ Image upload failed: no file or file.path');
+    return res.status(400).json({ msg: 'Image upload failed' });
+  }
+
+  res.status(200).json({ imageUrl: req.file.path });
 });
 
 export default router;

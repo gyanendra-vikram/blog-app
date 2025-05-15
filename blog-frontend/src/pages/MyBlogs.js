@@ -52,7 +52,7 @@ export default function MyBlogs() {
 
               {b.image && (
                 <img
-                  src={`http://localhost:5000${b.image}`}
+                  src={b.image}
                   alt="Blog"
                   className="w-full max-h-64 object-cover rounded"
                 />
