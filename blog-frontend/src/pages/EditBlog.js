@@ -120,7 +120,7 @@ export default function EditBlog() {
             ) : (
               existingImage && (
                 <img
-                  src={`http://localhost:5000${existingImage}`}
+                  src={existingImage}
                   alt="Current"
                   className="w-full max-h-64 object-cover rounded"
                 />
