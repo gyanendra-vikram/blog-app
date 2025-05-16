@@ -1,11 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import {jwtDecode} from 'jwt-decode';
+import API from '../utils/api';
 
 export default function Navbar({ onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [username, setUsername] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        const decoded = jwtDecode(token);
+        const userId = decoded.id;
+
+        const res = await API.get('/auth/me');
+        setUsername(res.data.name);
+      } catch (err) {
+        console.error('Failed to fetch user info:', err.message);
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -15,18 +37,11 @@ export default function Navbar({ onLogout }) {
   };
 
   const linkClass = (path) =>
-  `text-sm px-3 py-2 rounded-md transition ${
-    location.pathname === path
-      ? 'text-indigo-950 font-semibold'
-      : 'text-gray-600 hover:text-indigo-950 hover:bg-gray-200'
-  }`;
-
-  // const linkClass = (path) =>
-  //   `text-sm px-3 py-2 rounded-md transition ${
-  //     location.pathname === path
-  //       ? 'bg-blue-100 text-blue-700 font-semibold'
-  //       : 'text-gray-600 hover:bg-gray-200'
-  //   }`;
+    `text-sm px-3 py-2 rounded-md transition ${
+      location.pathname === path
+        ? 'text-indigo-950 font-semibold'
+        : 'text-gray-600 hover:text-indigo-950 hover:bg-gray-200'
+    }`;
 
   return (
     <nav className="bg-white shadow sticky top-0 z-50">
@@ -36,8 +51,8 @@ export default function Navbar({ onLogout }) {
             BlogApp
           </Link>
 
-
           <div className="md:hidden">
+            {username && <span className="text-l" style={{ color: '#1f1346' }}><strong>{username}  </strong></span>}
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-700 focus:outline-none text-2xl"
@@ -50,6 +65,15 @@ export default function Navbar({ onLogout }) {
             <Link to="/" className={linkClass('/')}>All Blogs</Link>
             <Link to="/create" className={linkClass('/create')}>Create</Link>
             <Link to="/my-blogs" className={linkClass('/my-blogs')}>My Blogs</Link>
+            {/* {username && <span className="text-sm" style={{ color: '#1f1346' }}><strong>{username}</strong></span>} */}
+            {username && (
+              <div className="flex items-center gap-2 pr-2">
+                <div className="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold uppercase text-sm">
+                  {username.charAt(0)}
+                </div>
+                <span className="text-sm" style={{ color: '#1f1346' }}><strong>{username}</strong></span>
+              </div>
+            )}
             <button
               onClick={handleLogout}
               className="bg-red-500 text-white text-sm px-3 py-1 rounded hover:bg-red-600"
