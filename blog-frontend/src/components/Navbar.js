@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import {jwtDecode} from 'jwt-decode';
+// import {jwtDecode} from 'jwt-decode';
 import API from '../utils/api';
 
 export default function Navbar({ onLogout }) {
@@ -16,8 +16,8 @@ export default function Navbar({ onLogout }) {
         const token = localStorage.getItem('token');
         if (!token) return;
 
-        const decoded = jwtDecode(token);
-        const userId = decoded.id;
+        // const decoded = jwtDecode(token);
+        // const userId = decoded.id;
 
         const res = await API.get('/auth/me');
         setUsername(res.data.name);
