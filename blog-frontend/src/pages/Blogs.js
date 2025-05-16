@@ -23,18 +23,19 @@ export default function Blogs() {
 
   return (
     <div className="p-4">
-      <div className="flex gap-2 mb-4">
-        <input
-          placeholder="Category"
-          onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-          className="border p-2"
-        />
-        <input
-          placeholder="Author"
-          onChange={(e) => setFilters({ ...filters, author: e.target.value })}
-          className="border p-2"
-        />
-      </div>
+      <div className="flex flex-wrap gap-2 mb-4">
+  <input
+    placeholder="Category"
+    onChange={(e) => setFilters({ ...filters, category: e.target.value })}
+    className="border p-2 flex-1 min-w-[150px]"
+  />
+  <input
+    placeholder="Author"
+    onChange={(e) => setFilters({ ...filters, author: e.target.value })}
+    className="border p-2 flex-1 min-w-[150px]"
+  />
+</div>
+
 
       <div className="grid gap-4">
         {blogs.map((b) => (
@@ -48,6 +49,7 @@ export default function Blogs() {
                 alt="Blog"
                 className="w-full max-h-64 object-cover rounded"
               />
+              
             )}
 
             <p>{b.content.slice(0, 150)}...</p>
