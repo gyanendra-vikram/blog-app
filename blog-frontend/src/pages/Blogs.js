@@ -36,23 +36,22 @@ export default function Blogs() {
   />
 </div>
 
-
-      <div className="grid gap-4">
+      <div className="grid gap-4 lg:grid-cols-2">
         {blogs.map((b) => (
           <div key={b._id} className="p-4 border rounded space-y-2">
-            <h2 className="text-xl font-bold">{b.title}</h2>
-            <p className="text-sm text-gray-500">By {b.author} | {b.category}</p>
+            <div>
+              <h2 className="text-xl font-bold mb-2">{b.title}</h2>
+              <p className="text-sm text-gray-500 mb-2">By {b.author} | {b.category}</p>
+                {b.image && (
+                  <img
+                    src={b.image}
+                    alt="Blog"
+                    className="grid grid-cols-2 px-auto py-auto mr-auto my-auto max-h-64 object-cover rounded mb-2"
+                  />   
+                )}
+               <p>{b.content.slice(0, 150)}...</p>
+            </div>
 
-            {b.image && (
-              <img
-                src={b.image}
-                alt="Blog"
-                className="w-full max-h-64 object-cover rounded"
-              />
-              
-            )}
-
-            <p>{b.content.slice(0, 150)}...</p>
           </div>
         ))}
       </div>

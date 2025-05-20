@@ -44,17 +44,18 @@ export default function MyBlogs() {
       {blogs.length === 0 ? (
         <p className="text-gray-500">You haven't created any blogs yet.</p>
       ) : (
-        <div className="grid gap-4">
+        <div className="grid gap-4 lg:grid-cols-2">
           {blogs.map((b) => (
             <div key={b._id} className="p-4 border rounded space-y-2">
-              <h3 className="text-xl font-bold">{b.title}</h3>
-              <p className="text-sm text-gray-500">{b.category}</p>
+              <div>
+              <h3 className="text-xl font-bold mb-2">{b.title}</h3>
+              <p className="text-sm text-gray-500 mb-2">{b.category}</p>
 
               {b.image && (
                 <img
                   src={b.image}
                   alt="Blog"
-                  className="w-full max-h-64 object-cover rounded"
+                  className="grid grid-cols-2 px-auto py-auto mr-auto my-auto max-h-64 object-cover rounded mb-2"
                 />
               )}
 
@@ -72,6 +73,7 @@ export default function MyBlogs() {
                 >
                   Delete
                 </button>
+              </div>
               </div>
             </div>
           ))}
