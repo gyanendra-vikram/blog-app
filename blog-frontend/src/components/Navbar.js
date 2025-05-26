@@ -76,20 +76,17 @@ export default function Navbar({ onLogout }) {
             to="/"
             className="flex items-center text-xl font-semibold text-white"
           >
-            <img
-              src={logo}
-              alt="BlogsMind"
-              className="h-12 w-12"
-            />
+            <img src={logo} alt="BlogsMind" className="h-12 w-12" />
             <span className="text-lg">B L O G S M I N D</span>
           </Link>
 
           <div className="md:hidden">
             {username && (
               <span className="text-l text-white">
-                <strong>{username} </strong>
+                <strong>{username.split(" ")[0]}</strong>
               </span>
             )}
+
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-400 focus:outline-none text-2xl"
