@@ -46,7 +46,8 @@ export default function MyBlogs() {
       ) : (
         <div className="grid gap-4 lg:grid-cols-2">
           {blogs.map((b) => (
-            <div key={b._id} className="p-4 border rounded space-y-2">
+            // <div key={b._id} className="p-4 border rounded space-y-2">
+            <div className="p-4 border rounded space-y-2 cursor-pointer transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-lg hover:border-gray-500">
               <div>
               <h3 className="text-xl font-bold mb-2">{b.title}</h3>
               <p className="text-sm text-gray-500 mb-2">{b.category}</p>
@@ -59,7 +60,7 @@ export default function MyBlogs() {
                 />
               )}
 
-              <p className="mb-2">{b.content.slice(0, 100)}...</p>
+              <p className="mb-2">{b.content.slice(0, 50)}...</p>
               <div className="flex gap-2">
                 <button
                   onClick={() => navigate(`/edit/${b._id}`)}
