@@ -79,9 +79,9 @@ export default function Navbar({ onLogout }) {
             <img
               src={logo}
               alt="BlogsMind"
-              className="h-15 w-14"
+              className="h-12 w-12"
             />
-            <span className="leading-none h-6">B L O G S M I N D</span>
+            <span className="text-lg">B L O G S M I N D</span>
           </Link>
 
           <div className="md:hidden">
