@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 // import {jwtDecode} from 'jwt-decode';
 import API from "../utils/api";
+import logo from "./logo3.png";
 
 export default function Navbar({ onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,15 +65,23 @@ export default function Navbar({ onLogout }) {
     `text-sm px-3 py-2 rounded-md transition ${
       location.pathname === path
         ? "text-emerald-300 font-semibold"
-        : "text-cyan-300 hover:text-white hover:bg-indigo-400"
+        : "text-white hover:text-white font-semibold"
     }`;
 
   return (
-    <nav className="bg-indigo-950 shadow sticky top-0 z-50">
+    <nav className="bg-[#0F1636] shadow sticky top-0 z-50">
       <div className="max-w-10xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
-          <Link to="/" className="text-xl font-bold text-white">
-            BlogApp
+          <Link
+            to="/"
+            className="flex items-center text-xl font-semibold text-white"
+          >
+            <img
+              src={logo}
+              alt="BlogsMind"
+              className="h-15 w-14"
+            />
+            <span className="leading-none h-6">B L O G S M I N D</span>
           </Link>
 
           <div className="md:hidden">
@@ -91,13 +100,13 @@ export default function Navbar({ onLogout }) {
 
           <div className="hidden md:flex gap-4 items-center">
             <Link to="/" className={linkClass("/")}>
-              All Blogs
+              ALL BLOGS
             </Link>
             <Link to="/create" className={linkClass("/create")}>
-              Create
+              CREATE
             </Link>
             <Link to="/my-blogs" className={linkClass("/my-blogs")}>
-              My Blogs
+              MY BLOGS
             </Link>
             {/* {username && <span className="text-sm" style={{ color: '#1f1346' }}><strong>{username}</strong></span>} */}
             {username && (
@@ -105,7 +114,7 @@ export default function Navbar({ onLogout }) {
                 <div className="w-8 h-8 rounded-full bg-indigo-400 text-white flex items-center justify-center font-bold uppercase text-sm">
                   {username.charAt(0)}
                 </div>
-                <span className="text-sm text-gray-200">
+                <span className="text-sm text-white">
                   <strong>{username}</strong>
                 </span>
               </div>
@@ -114,7 +123,7 @@ export default function Navbar({ onLogout }) {
               onClick={handleLogout}
               className="bg-red-500 text-white text-sm px-3 py-1 rounded hover:bg-red-600"
             >
-              Logout
+              LOGOUT
             </button>
           </div>
         </div>
@@ -126,21 +135,21 @@ export default function Navbar({ onLogout }) {
               className={linkClass("/")}
               onClick={() => setIsOpen(false)}
             >
-              All Blogs
+              ALL BLOGS
             </Link>
             <Link
               to="/create"
               className={linkClass("/create")}
               onClick={() => setIsOpen(false)}
             >
-              Create
+              CREATE
             </Link>
             <Link
               to="/my-blogs"
               className={linkClass("/my-blogs")}
               onClick={() => setIsOpen(false)}
             >
-              My Blogs
+              MY BLOGS
             </Link>
             <button
               onClick={() => {
@@ -149,7 +158,7 @@ export default function Navbar({ onLogout }) {
               }}
               className="bg-red-500 text-white text-sm px-3 py-1 rounded w-max self-start ml-3"
             >
-              Logout
+              LOGOUT
             </button>
           </div>
         )}
