@@ -35,27 +35,33 @@ export default function Navbar({ onLogout }) {
     onLogout();
     navigate('/login');
   };
+// hover:bg-cyan-500
 
+// hover:bg-emerald-500
+
+// hover:bg-rose-500
+
+// hover:bg-amber-500
   const linkClass = (path) =>
     `text-sm px-3 py-2 rounded-md transition ${
       location.pathname === path
-        ? 'text-indigo-950 font-semibold'
-        : 'text-gray-600 hover:text-indigo-950 hover:bg-gray-200'
+        ? 'text-emerald-300 font-semibold'
+        : 'text-cyan-300 hover:text-white hover:bg-indigo-400'
     }`;
 
   return (
-    <nav className="bg-white shadow sticky top-0 z-50">
+    <nav className="bg-indigo-950 shadow sticky top-0 z-50">
       <div className="max-w-10xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
-          <Link to="/" className="text-xl font-bold" style={{ color: '#1f1346' }}>
+          <Link to="/" className="text-xl font-bold text-gray-300">
             BlogApp
           </Link>
 
           <div className="md:hidden">
-            {username && <span className="text-l" style={{ color: '#1f1346' }}><strong>{username}  </strong></span>}
+            {username && <span className="text-l text-white"><strong>{username}  </strong></span>}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 focus:outline-none text-2xl"
+              className="text-gray-400 focus:outline-none text-2xl"
             >
               ☰
             </button>
@@ -68,10 +74,10 @@ export default function Navbar({ onLogout }) {
             {/* {username && <span className="text-sm" style={{ color: '#1f1346' }}><strong>{username}</strong></span>} */}
             {username && (
               <div className="flex items-center gap-2 pr-2">
-                <div className="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold uppercase text-sm">
+                <div className="w-8 h-8 rounded-full bg-indigo-400 text-white flex items-center justify-center font-bold uppercase text-sm">
                   {username.charAt(0)}
                 </div>
-                <span className="text-sm" style={{ color: '#1f1346' }}><strong>{username}</strong></span>
+                <span className="text-sm text-gray-200" ><strong>{username}</strong></span>
               </div>
             )}
             <button
