@@ -1,10 +1,11 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import API from "../utils/api";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
   const [filters, setFilters] = useState({ category: "", author: "" });
   const [selectedBlog, setSelectedBlog] = useState(null);
+  const modalRef = useRef();
 
   const fetchBlogs = useCallback(async () => {
     try {
@@ -21,6 +22,29 @@ export default function Blogs() {
   useEffect(() => {
     fetchBlogs();
   }, [fetchBlogs]);
+
+  useEffect(() => {
+    if (selectedBlog) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setSelectedBlog(null);
+      }
+    };
+
+    if (selectedBlog) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [selectedBlog]);
 
   return (
     <div className="p-4">
@@ -65,7 +89,10 @@ export default function Blogs() {
         {/* popupcode */}
         {selectedBlog && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="relative bg-white p-6 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-lg">
+            <div
+              ref={modalRef}
+              className="relative bg-white p-6 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-lg"
+            >
               <button
                 onClick={() => setSelectedBlog(null)}
                 className="absolute top-2 right-3 text-gray-500 hover:text-black text-xl font-bold"
