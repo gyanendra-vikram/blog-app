@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "BlogApp",
+  "name": "BlogApp - Your Personal Blogging Platform",
+  "description": "A modern blogging platform to share your thoughts and ideas with the world.",
   "icons": [
     {
       "src": "favicon.ico",
