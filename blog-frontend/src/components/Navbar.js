@@ -53,7 +53,7 @@ export default function Navbar({ onLogout }) {
     <nav className="bg-indigo-950 shadow sticky top-0 z-50">
       <div className="max-w-10xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
-          <Link to="/" className="text-xl font-bold text-gray-300">
+          <Link to="/" className="text-xl font-bold text-white">
             BlogApp
           </Link>
 
