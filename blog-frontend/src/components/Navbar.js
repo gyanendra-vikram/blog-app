@@ -82,7 +82,7 @@ export default function Navbar({ onLogout }) {
 
           <div className="md:hidden">
             {username && (
-              <span className="text-l text-white">
+              <span className="text-l text-white mr-1">
                 <strong>{username.split(" ")[0]}</strong>
               </span>
             )}
