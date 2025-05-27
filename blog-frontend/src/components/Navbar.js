@@ -76,8 +76,8 @@ export default function Navbar({ onLogout }) {
             to="/"
             className="flex items-center text-xl font-semibold text-white"
           >
-            <img src={logo} alt="BlogsMind" className="h-12 w-12" />
-            <span className="text-lg">B L O G S M I N D</span>
+            <img src={logo} alt="BlogsMind" className="mt-1 h-12 w-12" />
+            <span className="text-lg mt-1">B L O G S M I N D</span>
           </Link>
 
           <div className="md:hidden">
