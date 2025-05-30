@@ -108,7 +108,7 @@ export default function Navbar({ onLogout }) {
             {/* {username && <span className="text-sm" style={{ color: '#1f1346' }}><strong>{username}</strong></span>} */}
             {username && (
               <div className="flex items-center gap-2 pr-2">
-                <div className="w-8 h-8 rounded-full bg-indigo-400 text-white flex items-center justify-center font-bold uppercase text-sm">
+                <div className="w-8 h-8 rounded-full bg-white text-[#0F1636] flex items-center justify-center font-bold uppercase text-sm">
                   {username.charAt(0)}
                 </div>
                 <span className="text-sm text-white">
