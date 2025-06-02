@@ -1,11 +1,18 @@
-import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import API from '../utils/api';
-import { toast } from 'react-toastify';
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import API from "../utils/api";
+import { toast } from "react-toastify";
 
 export default function Signup({ onSignup }) {
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/", { replace: true });
+    }
+  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -15,20 +22,22 @@ export default function Signup({ onSignup }) {
     e.preventDefault();
 
     try {
-      const res = await API.post('/auth/signup', form);
-      localStorage.setItem('token', res.data.token);
-      toast.success('Account created!');
+      const res = await API.post("/auth/signup", form);
+      localStorage.setItem("token", res.data.token);
+      toast.success("Account created!");
       onSignup();
-      navigate('/');
+      navigate("/");
     } catch (err) {
-      toast.error(err.response?.data?.msg || 'Signup failed');
+      toast.error(err.response?.data?.msg || "Signup failed");
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-100 px-4">
       <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-xl">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Create an Account</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+          Create an Account
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
@@ -65,7 +74,7 @@ export default function Signup({ onSignup }) {
           </button>
         </form>
         <p className="text-sm text-center mt-4">
-          Already have an account?{' '}
+          Already have an account?{" "}
           <Link to="/login" className="text-blue-600 hover:underline">
             Log in
           </Link>

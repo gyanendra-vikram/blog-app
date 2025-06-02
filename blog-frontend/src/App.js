@@ -10,6 +10,7 @@ import Blogs from './pages/Blogs';
 import CreateBlog from './pages/CreateBlog';
 import MyBlogs from './pages/MyBlogs';
 import EditBlog from './pages/EditBlog';
+import ForgotPassword from './pages/ForgotPassword';
 
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem('token');
@@ -42,6 +43,7 @@ function App() {
 
         <Route path="/login" element={<Login onLogin={() => setIsLoggedIn(true)} />} />
         <Route path="/signup" element={<Signup onSignup={() => setIsLoggedIn(true)} />} />
+        <Route path="/reset" element={<ForgotPassword  />} />
 
         <Route path="/blogs" element={<PrivateRoute><Blogs /></PrivateRoute>} />
         <Route path="/create" element={<PrivateRoute><CreateBlog /></PrivateRoute>} />

@@ -1,11 +1,18 @@
-import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import API from '../utils/api';
-import { toast } from 'react-toastify';
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import API from "../utils/api";
+import { toast } from "react-toastify";
 
-export default function Login({onLogin}) {
-  const [form, setForm] = useState({ email: '', password: '' });
+export default function Login({ onLogin }) {
+  const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/", { replace: true });
+    }
+  }, []);
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -14,20 +21,22 @@ export default function Login({onLogin}) {
     e.preventDefault();
 
     try {
-      const res = await API.post('/auth/login', form);
-      localStorage.setItem('token', res.data.token);
-      toast.success('Login successful!');
+      const res = await API.post("/auth/login", form);
+      localStorage.setItem("token", res.data.token);
+      toast.success("Login successful!");
       onLogin();
-      navigate('/');
+      navigate("/");
     } catch (err) {
-      toast.error(err.response?.data?.msg || 'Login failed');
+      toast.error(err.response?.data?.msg || "Login failed");
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-100 px-4">
       <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-xl">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Welcome Back</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+          Welcome Back
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"
@@ -53,11 +62,16 @@ export default function Login({onLogin}) {
           </button>
         </form>
         <p className="text-sm text-center mt-4">
-          Don’t have an account?{' '}
+          Don’t have an account?{" "}
           <Link to="/signup" className="text-blue-600 hover:underline">
             Sign up
           </Link>
         </p>
+        {/* <p className="text-sm text-center mt-2">
+          <Link to="/reset" className="text-blue-600 hover:underline">
+            Forgot Password?
+          </Link>
+        </p> */}
       </div>
     </div>
   );
