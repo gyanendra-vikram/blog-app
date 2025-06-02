@@ -6,13 +6,13 @@ import { toast } from "react-toastify";
 export default function Signup({ onSignup }) {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       navigate("/", { replace: true });
     }
-  }, []);
+  }, [navigate]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

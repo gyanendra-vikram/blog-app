@@ -12,7 +12,7 @@ export default function Login({ onLogin }) {
     if (token) {
       navigate("/", { replace: true });
     }
-  }, []);
+  }, [navigate]);
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
